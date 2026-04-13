@@ -1,0 +1,4 @@
+Drop exported SVG files here (or on your Desktop). In Cursor, ask to copy each path’s d="..." into VoiceAIWidget.tsx:
+  PATH_COLLAPSED_TAIL, PATH_COLLAPSED_LOOP, PATH_ACTIVE_ELONGATED
+
+Framer only runs the pasted code — it cannot open files from your computer.
