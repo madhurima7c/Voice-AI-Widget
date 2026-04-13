@@ -144,7 +144,7 @@ SUPABASE_SERVICE_KEY=eyJ...     ← use service_role key, not anon
    - Best sources: Loom recording, Voice Memo, screen recording with narration
    - Must be clean audio — no background music, minimal noise
    - Speak conversationally (not reading) — vary tone and pace naturally
-4. Name it (e.g. "Madhurima Portfolio")
+4. Name it (e.g. "Portfolio Voice")
 5. Save → copy the **Voice ID**
 6. Add to `.env.local` as `ELEVENLABS_VOICE_ID`
 7. Test in ElevenLabs playground before moving on
@@ -311,7 +311,7 @@ Or add env vars via **Vercel Dashboard → project → Settings → Environment 
 ### Tune the system prompt + knowledge base
 - **`knowledge-base/`** — bio, projects, `ai-use.txt`, `personality.txt`, `guardrails.txt` (then **`npm run ingest`**).
 - **`app/api/chat/route.ts`** — system prompt rules (grounding, tone, banned phrases).
-- **Vercel env (optional):** `PORTFOLIO_CONTACT_LINE` — single sentence if you want a **specific email or CTA** spoken verbatim (otherwise defaults to LinkedIn + madhurima.me + phone).
+- **Vercel env (optional):** `PORTFOLIO_CONTACT_LINE` — single sentence if you want a **specific email or CTA** spoken verbatim (otherwise the model uses only contact info from your knowledge base CONTEXT).
 
 ### Redeploy after changes
 ```bash
@@ -380,7 +380,7 @@ These are the **last line of defense** for your wallet — keep them **below** w
 - “I’m running low on airtime here — one or two more questions and then I’ll let you go. What matters most?”
 
 **Hard stop (at limit)** — aligned with **`guardrails.txt`** / quota tone:
-- “I can’t do more voice back-and-forth right now — thanks for stopping by. Come back later, or reach me through madhurima.me / LinkedIn if it’s work-related.”
+- “I can’t do more voice back-and-forth right now — thanks for stopping by. Come back later, or use the site’s contact if it’s work-related.”
 - Variations: same **humble** energy as *“I can’t afford that many responses right now — come back later, yeah?”* — **never** “you used too many tokens.”
 
 **Optional:** After the hard message, widget shows a **tiny text hint**: “Voice session limit reached for today.”

@@ -33,8 +33,8 @@ const KNOWLEDGE_BASE_DIR = path.join(process.cwd(), "knowledge-base")
 
 // GitHub repos to pull READMEs from (add your repos here)
 const GITHUB_REPOS: string[] = [
-    // "madhurima7c/repo-name-1",
-    // "madhurima7c/repo-name-2",
+    // "your-github-username/repo-name-1",
+    // "your-github-username/repo-name-2",
 ]
 
 function getOpenAI(): OpenAI {
