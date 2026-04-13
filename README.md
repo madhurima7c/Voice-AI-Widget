@@ -35,10 +35,6 @@ Deploy: connect this folder to Vercel, add the same env vars as in `.env.example
 - Full phased plan: **`voice-ai-backend/PLAN.md`**
 - Backend setup detail: **`voice-ai-backend/README.md`**
 
-## Knowledge base (your content)
-
-The **`voice-ai-backend/knowledge-base/*.txt`** files in this repo are **generic placeholders** (example.com–style). Replace them locally with your real bio, resume, and projects, then run `npm run ingest`. If the repo is public, avoid committing private phone numbers, personal email, or anything you do not want indexed on GitHub.
-
 ## Secrets
 
 Never commit **`.env.local`** or API keys. Use Vercel **Environment Variables** for production.

@@ -286,9 +286,9 @@ const SPEAKING_GLOW_MULT: Record<SpeakingGlowKey, number> = {
 
 export default function VoiceAIWidget({
     apiBaseUrl = "https://voice-ai-backend-one.vercel.app",
-    agentName = "Assistant",
+    agentName = "Madhurima",
     agentSubtitle = "Audio call",
-    greetingMessage = "Hey, how can I help you today?",
+    greetingMessage = "Hey, how can I help you? I'm Madhurima.",
     accentColor = ACCENT_DEFAULT,
     loopGreyColor = LOOP_GREY_DEFAULT,
     defaultCardShadow = DEFAULT_CARD_SHADOW,
@@ -924,9 +924,9 @@ addPropertyControls(VoiceAIWidget, {
     greetingMessage: {
         type: ControlType.String,
         title: "Greeting",
-        defaultValue: "Hey, how can I help you today?",
+        defaultValue: "Hey, how can I help you? I'm Madhurima.",
     },
-        agentName: { type: ControlType.String, title: "Name", defaultValue: "Assistant" },
+    agentName: { type: ControlType.String, title: "Name", defaultValue: "Madhurima" },
     agentSubtitle: { type: ControlType.String, title: "Subtitle", defaultValue: "Audio call" },
 
     accentColor: {

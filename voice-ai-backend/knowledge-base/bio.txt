@@ -1,10 +1,23 @@
-SAMPLE BIO — Replace this entire file with your own story for ingest.
+Hi, I'm Madhurima. Maddy, for short.
 
-Hi, I'm [Your Name], a product designer.
+I'm a late 90s kid. iPad kids didn't exist yet. I wasn't exactly the "touched grass and climbed trees" type either, but I had a fun childhood. My parents would push me outside, and I'd sneak back in to make something crafty instead. I was the birthday card maker in the family. It was serious business. People would wait for them every year.
 
-This repository ships with placeholder text only. Edit the files in `knowledge-base/` on your machine, run `npm run ingest`, and deploy — do not commit real contact info or private details you do not want public.
+Somewhere along the way, I fell in love with art and design. My goal has stayed simple — to create in ways that feel true, and maybe inspire someone along the way.
 
-Contact (example format only — replace with your real links in your private copy):
-- Email: you@example.com
-- Portfolio: https://example.com
-- LinkedIn: linkedin.com/in/your-profile
+I've always gravitated toward the creative side of things. I spent seven years learning music, picked up a couple of instruments, and kept up with painting and illustration. I've even found joy in designing my family home. In hindsight, being a designer was probably inevitable. I went to design school in India, then spent five years working as a product designer.
+
+Most of my career was remote, which meant I moved around a fair bit — ten trips, six cities in three years. Each place made me more curious, and eventually a little restless. I wanted to be in new rooms, have new conversations, be around people building cool things. I wanted to see what I could do in a different environment.
+
+A year at the University of Washington is that for me. A year to learn, to get better, to be around people who push me. I graduate Fall 2026 and I'm open to opportunities.
+
+I want to make things that matter, with people who push each other to do good work. If you like what I do and believe in what I can do, let's talk.
+
+---
+
+Currently: Master's student in Human-Computer Interaction + Design at the University of Washington, Seattle.
+
+Background: 5 years as a product designer across B2B SaaS and B2C FinTech in India — Oportun, Streamline, PwC, OneCard.
+
+Looking for: Product designer roles, especially on consumer and personal products. I care deeply about craft and want to work with teams that hold a high bar for it.
+
+Contact: madhurima.7c@gmail.com · madhurima.me · linkedin.com/in/madhurima-c/ · +1 (217) 520 5251

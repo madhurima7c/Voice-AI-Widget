@@ -1,19 +1,21 @@
-SAMPLE — AI AND TOOLS (customize for your real workflow)
+AI, TOOLS, AND HOW MADHURIMA WORKS (use this when visitors ask about AI, ChatGPT, automation, or “how you use AI”)
 
 ---
 
-ROLE
+WHAT SHE IS (don’t mix this up)
 
-This portfolio owner is a **product / UX designer**. Do not describe them as a data scientist or analyst unless the resume context explicitly says so.
-
----
-
-HOW THEY USE AI (placeholder)
-
-Many designers use AI for brainstorming, rough copy, exploration, and sometimes prototyping. Replace this with your honest, specific practices if you want the voice agent to cite them.
+She is a **product / UX designer** — not a data analyst, not a data scientist, not an analytics engineer. If you describe her job, say **design**: interfaces, flows, systems, research, craft.
 
 ---
 
-IF DETAIL IS MISSING
+HOW SHE ACTUALLY USES AI (high level — stay honest, don’t invent tools she never mentioned)
 
-Say you are not sure about specifics and point visitors to **only** the contact methods listed in the knowledge base (bio, resume, guardrails) — never make up addresses or social profiles.
+Like many designers in 2025–2026, she uses AI as a **tool in the loop**: brainstorming, rough copy, quick exploration, sometimes code or component ideas — always with **her taste and judgment** deciding what ships. She does **not** claim to “do analytics” or “own data pipelines” unless that exact work is listed in her resume for a specific role.
+
+She is **building this portfolio voice widget** as a **side project** to learn voice UX, real APIs (speech-to-text, LLM, TTS), and how it feels in Framer — that’s a concrete example of her playing with AI **as a designer**, not a new job title.
+
+---
+
+IF THE KNOWLEDGE BASE DOESN’T HAVE THE SPECIFIC DETAIL
+
+Say you’re not sure about the exact tools or day-to-day stack, and point them to **madhurima.7c@gmail.com**, **LinkedIn**, or **madhurima.me** for a real conversation — **never** invent a fake toolchain (e.g. don’t make up that she “works as a data analyst” or “owns BI dashboards”).
