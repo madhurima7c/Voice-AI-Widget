@@ -6,7 +6,7 @@
 >
 > **Cursor — audience:** The owner is a **product designer**, not a professional developer. They are **vibe-coding** with AI help. **Always explain steps in plain English** (what, why, outcome) before or alongside commands and file paths. Prefer short analogies (e.g. “API key = password for a service”) over jargon. Offer to run terminal steps for them when possible. Never assume they know what `curl`, SQL, or “deploy” imply without a one-line plain definition.
 >
-> **Secrets — never commit or share:** API keys live only in **`voice-ai-backend/.env.local`** on your machine (and later in **Vercel → Environment Variables** for production). That file is listed in **`.gitignore`** so Git won’t commit it — still never paste keys into chat, tickets, or screenshots. If the user asks *“Did you remember not to commit / share the env file?”* — confirm **yes**, and do not add secrets to any tracked file.
+> **Secrets — never commit or share:** API keys live only in **`.env.local`** at the **repo root** on your machine (and later in **Vercel → Environment Variables** for production). That file is listed in **`.gitignore`** so Git won’t commit it — still never paste keys into chat, tickets, or screenshots. If the user asks *“Did you remember not to commit / share the env file?”* — confirm **yes**, and do not add secrets to any tracked file.
 
 ---
 
@@ -56,7 +56,7 @@ If something fails, paste the error into Cursor and ask what it means in simple 
 
 **Why:** Better files → better answers and safer tone (plus `guardrails.txt` for how to behave).
 
-**Where:** `voice-ai-backend/knowledge-base/`
+**Where:** `knowledge-base/` (repo root)
 
 ### `resume.txt`
 Paste your full CV as plain text:
@@ -107,7 +107,7 @@ Rules for tone and boundaries (off-topic, personal, inappropriate). Keep updatin
 
 **Why:** Without keys, nothing talks to speech, brains, or your database.
 
-**Where:** `voice-ai-backend/.env.local` — inside the project folder; **Git ignores it** (`.gitignore`). **Do not commit it, do not share it, do not paste keys into Slack/email/chat.** For production, use **Vercel → Environment Variables** — not files in the repo.
+**Where:** `.env.local` at the **repo root**; **Git ignores it** (`.gitignore`). **Do not commit it, do not share it, do not paste keys into Slack/email/chat.** For production, use **Vercel → Environment Variables** — not files in the repo.
 
 **Reminder:** You can ask Cursor *“Did we keep secrets out of Git?”* — answer should always be **yes**; secrets only in `.env.local` (your machine) and Vercel (hosted).
 
@@ -186,10 +186,10 @@ SUPABASE_SERVICE_KEY=eyJ...     ← use service_role key, not anon
 **Goal:** Embed your knowledge base and store vectors in Supabase  
 **Requires:** Phases 1–4 complete, `.env.local` filled in
 
-Ask Cursor to run this from the `voice-ai-backend` folder, or in Terminal:
+Ask Cursor to run this from the **repo root**, or in Terminal:
 
 ```bash
-cd voice-ai-backend
+cd Voice-AI-Widget   # repo root
 npm run ingest
 ```
 
@@ -219,7 +219,7 @@ npm run ingest
 
 | What you changed | What to do | Where it ends up |
 |------------------|------------|------------------|
-| **`knowledge-base/*.txt`** only | From `voice-ai-backend`: run **`npm run ingest`** (needs `.env.local` with OpenAI + Supabase keys). | **Supabase** — embeddings overwrite/refresh the `documents` table your chat API already queries. Nothing “uploads” to Vercel for text. |
+| **`knowledge-base/*.txt`** only | From **repo root**: run **`npm run ingest`** (needs `.env.local` with OpenAI + Supabase keys). | **Supabase** — embeddings overwrite/refresh the `documents` table your chat API already queries. Nothing “uploads” to Vercel for text. |
 | **Backend code** (routes, `middleware`, etc.) | Commit → **`git push`** to your GitHub repo (if the project uses Git). | **Vercel** — if the repo is connected, Vercel **rebuilds and deploys** automatically (or run **`vercel --prod`** from the folder). |
 | **Both** | Ingest first or last; order rarely matters, but **always ingest after KB edits** so live answers match your files. | Supabase (vectors) + Vercel (code). |
 
@@ -236,7 +236,7 @@ npm run ingest
 **Goal:** Verify all 3 API endpoints work before deploying
 
 ```bash
-cd voice-ai-backend
+cd Voice-AI-Widget   # repo root
 npm run dev
 # Server running at http://localhost:3000
 ```
@@ -287,8 +287,8 @@ curl -X POST http://localhost:3000/api/transcribe \
 # Install Vercel CLI (if not already)
 npm install -g vercel
 
-# Deploy from voice-ai-backend folder
-cd voice-ai-backend
+# Deploy from repo root (Next.js app lives here)
+cd Voice-AI-Widget
 vercel
 
 # Add all env vars

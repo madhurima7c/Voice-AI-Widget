@@ -1,6 +1,0 @@
-.env.local
-.env*.local
-.next
-node_modules
-.ingest-out
-.vercel

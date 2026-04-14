@@ -4,36 +4,39 @@ Framer **voice UI** + Next.js **backend** for a portfolio voice assistant: liste
 
 **Repository layout**
 
-| Folder | What it is |
-|--------|------------|
+| Folder / path | What it is |
+|---------------|------------|
 | **`widget/`** | `VoiceAIWidget.tsx` (paste into Framer as a code component) + `voice-widget-vectors/` (source SVGs; paths are inlined in the component). |
-| **`voice-ai-backend/`** | Next.js app: `/api/transcribe`, `/api/chat`, `/api/speak`. Deploy to Vercel; point the widget **API Base URL** at that origin. |
+| **Repo root** (`app/`, `package.json`) | Next.js app: `/api/transcribe`, `/api/chat`, `/api/speak`. **Deploy this whole repo on Vercel** (root directory = `.` / leave blank). Point the widget **API Base URL** at that deployment’s origin. |
 
-## Quick start
-
-### Backend
+## Quick start — backend (repo root)
 
 ```bash
-cd voice-ai-backend
+git clone https://github.com/madhurima7c/Voice-AI-Widget.git
+cd Voice-AI-Widget
 cp .env.example .env.local
-# Edit .env.local with your keys (see voice-ai-backend/README.md)
+# Edit .env.local with your keys (see BACKEND.md)
 npm install
-npm run ingest    # embeds knowledge-base/ into Supabase — run after editing .txt files
+npm run ingest    # after editing knowledge-base/*.txt
 npm run dev       # http://localhost:3000
 ```
 
-Deploy: connect the **GitHub repo root** (not only `voice-ai-backend/`) to Vercel. The repo includes **`vercel.json`** plus a root **`package.json`** that lists `next` (same version as the backend) so Vercel’s Next.js detector succeeds; install runs at the **root** and under **`voice-ai-backend/`**, and `next build` runs in `voice-ai-backend/`. Add the same env vars as in `voice-ai-backend/.env.example`. Optional alternative: in Vercel → Project → Settings → General, set **Root Directory** to `voice-ai-backend` and you can remove the root shim / custom overrides if you prefer.
+### Vercel
+
+Connect the **GitHub repo** with **Root Directory** left as the **repository root** (default). No `vercel.json` is required — Vercel detects Next.js from root `package.json` and `app/`. Add the same environment variables as in `.env.example`.
+
+If an older Vercel project was set to **Root Directory = `voice-ai-backend`**, open **Project → Settings → General** and clear that field (or set it to `.`) so the build uses the hoisted layout.
 
 ### Framer widget
 
-1. Open **`widget/VoiceAIWidget.tsx`**, copy all code into a **Framer code component**.
-2. Set **API Base URL** to your deployed backend (e.g. `https://your-app.vercel.app`), no `/api` suffix.
+1. Open **`widget/VoiceAIWidget.tsx`**, copy into a Framer code component.
+2. Set **API Base URL** to your deployed URL (e.g. `https://….vercel.app`), no `/api` suffix.
 3. Publish the site.
 
 ## Docs
 
-- Full phased plan: **`voice-ai-backend/PLAN.md`**
-- Backend setup detail: **`voice-ai-backend/README.md`**
+- Phased plan: **`PLAN.md`**
+- Backend setup detail: **`BACKEND.md`**
 
 ## Secrets
 
