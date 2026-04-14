@@ -42,10 +42,11 @@ If something fails, paste the error into Cursor and ask what it means in simple 
 | Backend API routes (chat, speak, transcribe) | ✅ Deployed / working |
 | Ingest script | ✅ Run when you change `knowledge-base/*` |
 | Framer VoiceAIWidget + Vercel URL | ✅ Connected |
-| knowledge-base/ + RAG tuning | ⚠️ **Keep editing**; run `npm run ingest` after changes |
+| Knowledge base — **bigger expansion** (versatile, more sources, dynamic tone, lots of knowledge — e.g. draft/expand with Claude in Cursor) | ⏳ **Pending from you** (see Phase 1 — owner pending) |
+| knowledge-base/ + RAG tuning (ongoing) | ⚠️ After each edit → **Phase 5.5** (ingest + optional git push) |
 | Optional **`PORTFOLIO_CONTACT_LINE`** (Vercel env) | Optional one-liner for “how to reach you” (email, etc.) |
-| Phase 9 — prompt / personality polish | ⚠️ **In progress** (iterate on KB + redeploy / re-ingest) |
-| Phase 10 — usage caps & per-visitor limits | ❌ **Next required** before heavy public traffic |
+| Phase 9 — prompt / personality polish | ⚠️ **In progress** (iterate on KB + re-ingest; overlaps with KB expansion above) |
+| Phase 10 — usage caps & per-visitor limits | ❌ **Next engineering step** before heavy public traffic (after you’re happy with KB + live behavior) |
 
 ---
 
@@ -93,6 +94,10 @@ Write casually in first person — this makes the AI sound like YOU:
 Rules for tone and boundaries (off-topic, personal, inappropriate). Keep updating as you refine how you want the AI to feel.
 
 > **Tip:** Can pull from your LinkedIn About, any existing bio on your portfolio, or just free-write for 10 minutes. Ask Cursor to help polish/structure if you share raw notes.
+
+### Owner pending — richer knowledge base (you)
+
+**Still to do on your side:** Make the knowledge base **much more versatile** — add **more information** (you can draft and expand with **Claude in Cursor**), make tone and coverage **more dynamic**, and **feed it a lot of knowledge** (projects, opinions, process, FAQs, guardrails, anything the voice should know). Treat this as an ongoing content pass until answers feel complete and grounded; then re-run **ingest** (Phase 5 / 5.5) so Supabase matches what’s on disk.
 
 ---
 
@@ -205,6 +210,22 @@ npm run ingest
 **If it fails:** Check that all `.env.local` keys are set, Supabase SQL has been run, and OpenAI key has credits.
 
 > Re-run `npm run ingest` any time you update the knowledge-base files. It clears and re-embeds everything.
+
+---
+
+## Phase 5.5 — After you edit in Cursor: where things go (short)
+
+**Plain English:** Two different “publishes”: **code** vs. **searchable knowledge**. Don’t mix them up.
+
+| What you changed | What to do | Where it ends up |
+|------------------|------------|------------------|
+| **`knowledge-base/*.txt`** only | From `voice-ai-backend`: run **`npm run ingest`** (needs `.env.local` with OpenAI + Supabase keys). | **Supabase** — embeddings overwrite/refresh the `documents` table your chat API already queries. Nothing “uploads” to Vercel for text. |
+| **Backend code** (routes, `middleware`, etc.) | Commit → **`git push`** to your GitHub repo (if the project uses Git). | **Vercel** — if the repo is connected, Vercel **rebuilds and deploys** automatically (or run **`vercel --prod`** from the folder). |
+| **Both** | Ingest first or last; order rarely matters, but **always ingest after KB edits** so live answers match your files. | Supabase (vectors) + Vercel (code). |
+
+**Layman:** Think of **Git/Vercel** as “the app’s brain surgery” and **ingest/Supabase** as “refreshing the library the AI reads from.” Editing `.txt` without ingest = visitors still hear the **old** library.
+
+**Optional:** If the repo is **private** and you prefer not to commit certain `.txt` files, keep them local only and still run ingest — vectors live in **Supabase**, not in Git. (Then be careful cloning on a new machine without those files.)
 
 ---
 
@@ -404,6 +425,8 @@ These are the **last line of defense** for your wallet — keep them **below** w
 ## Summary Checklist
 
 - [ ] **Phase 1** — Fill `resume.txt`, `bio.txt`, `projects.txt`, `personality.txt`, keep `guardrails.txt` as you like
+- [ ] **Phase 1 (owner pending)** — Expand KB: more versatile, more knowledge, dynamic tone; use Claude in Cursor to draft/structure; keep iterating until answers feel complete
+- [ ] **Phase 5.5** — After Cursor edits: **ingest → Supabase** for any `.txt` change; **git push → Vercel** for any code change (see table above)
 - [ ] **Phase 2** — Create `.env.local` with all 6 keys
 - [ ] **Phase 3** — Clone voice on ElevenLabs, get Voice ID
 - [ ] **Phase 4** — Create Supabase project, run SQL setup
