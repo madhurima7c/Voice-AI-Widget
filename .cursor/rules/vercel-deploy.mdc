@@ -1,0 +1,28 @@
+---
+description: Vercel + repo layout — never break production builds on push
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+This repository is wired for **Vercel’s default Next.js build at the repository root**.
+
+## Layout (do not regress)
+
+- **`app/`**, **`package.json`**, **`middleware.ts`**, **`next.config.js`**, **`knowledge-base/`**, **`scripts/`** live at the **repo root** — not under `voice-ai-backend/`. The `voice-ai-backend/` folder is only a **stub README** for people with old bookmarks.
+- **`widget/`** holds the Framer paste component. It must stay in **`tsconfig.json` → `exclude`** (it imports `framer`, which is not a dependency here). Removing that exclude **breaks `npm run build`**.
+
+## Before every commit / push
+
+1. From **this repo root**: run **`npm run build`** and fix errors before pushing.
+2. Do **not** reintroduce a nested Next app under `voice-ai-backend/` without an explicit Vercel + docs plan.
+3. Do **not** add root **`vercel.json`** install/build hacks unless you are intentionally reverting to a monorepo subfolder layout.
+
+## Vercel dashboard (human check — remind the owner if deploys fail)
+
+- **Project → Settings → General → Root Directory:** must be **empty** / **.** (repo root). If it still says **`voice-ai-backend`**, builds will fail or behave like an old commit.
+- **Build & Development:** prefer **default** Install / Build (`npm install`, `npm run build` / Next preset). Clear stale overrides from earlier experiments.
+
+## If copying code from another folder (e.g. local `Portfolio-components`)
+
+- Map files to **this repo’s root paths** (`app/`, `knowledge-base/`, …), not into a new `voice-ai-backend/package.json` tree, unless the whole deploy story is updated together.
