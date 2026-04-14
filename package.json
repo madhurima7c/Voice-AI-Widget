@@ -1,0 +1,9 @@
+{
+  "name": "voice-ai-widget-monorepo",
+  "private": true,
+  "description": "Root shim for Vercel: Next.js app lives in voice-ai-backend/",
+  "scripts": {
+    "build": "npm run build --prefix voice-ai-backend",
+    "vercel-build": "npm run build"
+  }
+}

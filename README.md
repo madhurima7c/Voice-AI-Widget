@@ -22,7 +22,7 @@ npm run ingest    # embeds knowledge-base/ into Supabase — run after editing .
 npm run dev       # http://localhost:3000
 ```
 
-Deploy: connect this folder to Vercel, add the same env vars as in `.env.example`, redeploy after changes.
+Deploy: connect the **GitHub repo root** (not only `voice-ai-backend/`) to Vercel. The repo includes **`vercel.json`** so installs and `next build` run inside **`voice-ai-backend/`** — that avoids “Couldn't find any `pages` or `app` directory” when Vercel builds from the monorepo root. Add the same env vars as in `voice-ai-backend/.env.example`. Optional alternative: in Vercel → Project → Settings → General, set **Root Directory** to `voice-ai-backend` and you can remove custom build/install overrides if any.
 
 ### Framer widget
 
