@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "npm install --prefix voice-ai-backend",
+  "installCommand": "npm install && npm install --prefix voice-ai-backend",
   "buildCommand": "npm run build --prefix voice-ai-backend"
 }
