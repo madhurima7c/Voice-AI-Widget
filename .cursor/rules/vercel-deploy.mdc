@@ -9,7 +9,7 @@ This repository is wired for **Vercel’s default Next.js build at the repositor
 
 ## Layout (do not regress)
 
-- **`app/`**, **`package.json`**, **`middleware.ts`**, **`next.config.js`**, **`knowledge-base/`**, **`scripts/`** live at the **repo root** — not under `voice-ai-backend/`. The `voice-ai-backend/` folder is only a **stub README** for people with old bookmarks.
+- **`app/`**, **`package.json`**, **`middleware.ts`**, **`next.config.js`**, **`knowledge-base/`**, **`scripts/`** live at the **repo root** — there is **no** nested `voice-ai-backend/` app folder in this repo.
 - **`widget/`** holds the Framer paste component. It must stay in **`tsconfig.json` → `exclude`** (it imports `framer`, which is not a dependency here). Removing that exclude **breaks `npm run build`**.
 
 ## Before every commit / push

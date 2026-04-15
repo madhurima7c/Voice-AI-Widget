@@ -1,6 +1,6 @@
 # Voice AI Widget
 
-**Single source of truth** for this feature: this repository. The portfolio monorepo ([`react-components-portfolio`](https://github.com/madhurima7c/react-components-portfolio)) only keeps a stub `voice-ai-backend/README.md` that links here — do not maintain a second copy of the backend there. **Vercel production deploys from this repo.**
+**Single source of truth** for Voice AI: **this repository only** (Framer widget + Next.js API + knowledge base + Vercel). The [`react-components-portfolio`](https://github.com/madhurima7c/react-components-portfolio) repo does **not** contain Voice AI code — clone this repo for all work on the feature. **Vercel production deploys from here** (`main`, repo root).
 
 Framer **voice UI** + Next.js **backend** for a portfolio voice assistant: listen → transcribe → RAG chat → speak (cloned voice).
 
@@ -8,7 +8,7 @@ Framer **voice UI** + Next.js **backend** for a portfolio voice assistant: liste
 
 | Folder / path | What it is |
 |---------------|------------|
-| **`widget/`** | `VoiceAIWidget.tsx` (paste into Framer as a code component) + `voice-widget-vectors/` (source SVGs; paths are inlined in the component). |
+| **`widget/`** | `VoiceAIWidget.tsx` (paste into Framer) + `voice-widget-vectors/` (reference SVGs/GIF/JPG for design parity; paths are **inlined** in the component — use Framer Image props for runtime media). |
 | **Repo root** (`app/`, `package.json`) | Next.js app: `/api/transcribe`, `/api/chat`, `/api/speak`. **Deploy this whole repo on Vercel** (root directory = `.` / leave blank). Point the widget **API Base URL** at that deployment’s origin. |
 
 ## Quick start — backend (repo root)
