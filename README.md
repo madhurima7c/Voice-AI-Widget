@@ -1,5 +1,7 @@
 # Voice AI Widget
 
+**Single source of truth** for this feature: this repository. The portfolio monorepo ([`react-components-portfolio`](https://github.com/madhurima7c/react-components-portfolio)) only keeps a stub `voice-ai-backend/README.md` that links here — do not maintain a second copy of the backend there. **Vercel production deploys from this repo.**
+
 Framer **voice UI** + Next.js **backend** for a portfolio voice assistant: listen → transcribe → RAG chat → speak (cloned voice).
 
 **Repository layout**
