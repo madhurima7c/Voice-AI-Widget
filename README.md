@@ -29,6 +29,8 @@ Connect the **GitHub repo** with **Root Directory** left as the **repository roo
 
 If an older Vercel project was set to **Root Directory = `voice-ai-backend`**, open **Project → Settings → General** and clear that field (or set it to `.`) so the build uses the hoisted layout.
 
+**Before every deploy:** GitHub Actions runs **`npm ci` + `npm run build`** on every push and PR to `main` (see `.github/workflows/ci.yml`). If CI is green, Vercel should get the same build. Optional dashboard override: **`npm run vercel-build`** is the same as **`npm run build`**.
+
 ### Framer widget
 
 1. Open **`widget/VoiceAIWidget.tsx`**, copy into a Framer code component.

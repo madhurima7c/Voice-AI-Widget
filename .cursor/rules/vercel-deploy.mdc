@@ -14,7 +14,7 @@ This repository is wired for **Vercel’s default Next.js build at the repositor
 
 ## Before every commit / push
 
-1. From **this repo root**: run **`npm run build`** and fix errors before pushing.
+1. From **this repo root**: run **`npm ci && npm run build`** (or rely on **GitHub Actions** on `main` — `.github/workflows/ci.yml` runs the same).
 2. Do **not** reintroduce a nested Next app under `voice-ai-backend/` without an explicit Vercel + docs plan.
 3. Do **not** add root **`vercel.json`** install/build hacks unless you are intentionally reverting to a monorepo subfolder layout.
 
