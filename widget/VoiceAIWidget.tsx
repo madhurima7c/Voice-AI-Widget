@@ -26,6 +26,9 @@ const PATH_ACTIVE_TELE_HANDSET =
 const VB_DEFAULT = { w: 48, h: 20 }
 
 const ACCENT_DEFAULT = "#FB5219"
+/** Active state end-call circle (hover uses slightly darker red). */
+const END_CALL_BTN_BG = "#ED4D17"
+const END_CALL_BTN_BG_HOVER = "#cf4214"
 const CARD_BG = "#ffffff"
 /** Matches `active-img.svg` wire stroke `#CACACA`. */
 const LOOP_GREY_DEFAULT = "#CACACA"
@@ -36,6 +39,9 @@ const TIMER_COLOR = "#9E9E9E"
 /** Fallback shadows when Framer Box Shadow is empty — set real values in Properties. */
 const DEFAULT_CARD_SHADOW =
     "0px 2px 8px 0px rgba(0,0,0,0.06), 0px 10px 20px -8px rgba(251,82,25,0.10)"
+/** Appended while hovering the default pill — subtle extra depth (works with Framer shadows too). */
+const DEFAULT_CARD_SHADOW_HOVER_EXTRA =
+    "0px 6px 16px -4px rgba(0,0,0,0.07), 0px 12px 26px -8px rgba(251,82,25,0.11)"
 const DEFAULT_ACTIVE_CARD_SHADOW =
     "0px 2px 10px 0px rgba(0,0,0,0.07), 0px 10px 22px -8px rgba(251,82,25,0.10)"
 
@@ -581,6 +587,8 @@ export default function VoiceAIWidget({
     tooltipBackgroundColor = "#ffffff",
     tooltipMaxWidth = 220,
     tooltipPadding = "10px 12px",
+    tooltipBubbleOffsetX = 0,
+    tooltipBubbleOffsetY = 0,
     infoIconStroke = "#8A8A8A",
     infoIconFill = "#8A8A8A",
 }: {
@@ -618,6 +626,10 @@ export default function VoiceAIWidget({
     tooltipBackgroundColor?: string
     tooltipMaxWidth?: number
     tooltipPadding?: string
+    /** Horizontal px — moves the bubble only; pointer stays centered on the icon. */
+    tooltipBubbleOffsetX?: number
+    /** Vertical px — moves the bubble only; pointer stays fixed. Negative = up (avoids top clip). */
+    tooltipBubbleOffsetY?: number
     infoIconStroke?: string
     infoIconFill?: string
 }) {
@@ -655,6 +667,8 @@ export default function VoiceAIWidget({
     const [elapsedSec, setElapsedSec] = useState(0)
     const [isVoiceActive, setIsVoiceActive] = useState(false)
     const [infoTooltipOpen, setInfoTooltipOpen] = useState(false)
+    const [defaultCardHovered, setDefaultCardHovered] = useState(false)
+    const [endCallHovered, setEndCallHovered] = useState(false)
     const infoTipLeaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
     const openInfoTooltip = useCallback(() => {
@@ -798,6 +812,7 @@ export default function VoiceAIWidget({
         voiceLevelRef.current = 0
         smoothedLevelRef.current = 0
         setIsVoiceActive(false)
+        setEndCallHovered(false)
         setPhase("default")
         setMicError(false)
         greetingStartedRef.current = false
@@ -1153,6 +1168,9 @@ export default function VoiceAIWidget({
     }, [apiBase, greetingMessage, playAudioFromBlob])
 
     const defaultShadow = boxShadowToCSS(defaultCardShadow).trim() || DEFAULT_CARD_SHADOW
+    const defaultShadowInteractive = defaultCardHovered
+        ? `${defaultShadow}, ${DEFAULT_CARD_SHADOW_HOVER_EXTRA}`
+        : defaultShadow
     const defaultCardHeight = defaultAvatarSize + 12
 
     if (phase === "default") {
@@ -1172,16 +1190,19 @@ export default function VoiceAIWidget({
                         startCall()
                     }
                 }}
+                onMouseEnter={() => setDefaultCardHovered(true)}
+                onMouseLeave={() => setDefaultCardHovered(false)}
                 style={{
                     position: "relative",
                     display: "inline-flex",
                     alignItems: "center",
                     borderRadius: 14,
-                    boxShadow: defaultShadow,
+                    boxShadow: defaultShadowInteractive,
                     background: defaultCardBackground,
                     overflow: "visible",
                     cursor: "pointer",
                     outline: "none",
+                    transition: "box-shadow 0.22s ease",
                 }}
             >
                 <div
@@ -1364,42 +1385,49 @@ export default function VoiceAIWidget({
                                 </span>
                                 {infoTooltipOpen && (
                                     <div
-                                        id="voice-ai-widget-disclaimer"
-                                        role="tooltip"
                                         onClick={(e) => e.stopPropagation()}
                                         onMouseEnter={openInfoTooltip}
                                         onMouseLeave={scheduleCloseInfoTooltip}
                                         style={{
                                             position: "absolute",
-                                            ...(tooltipFontStyle as CSSProperties),
                                             left: "50%",
-                                            transform: "translateX(-50%)",
                                             bottom: "calc(100% + 8px)",
-                                            maxWidth: tooltipMaxWidth,
-                                            width: "max-content",
-                                            boxSizing: "border-box",
-                                            padding: tooltipPadding,
-                                            background: tooltipBackgroundColor,
-                                            color: tooltipTextColor,
-                                            borderRadius: 10,
-                                            boxShadow: boxShadowToCSS(tooltipShadow) || DEFAULT_TOOLTIP_SHADOW,
+                                            transform: "translateX(-50%)",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            alignItems: "center",
                                             zIndex: 50,
                                             pointerEvents: "auto",
-                                            textAlign: "left",
-                                            lineHeight: 1.35,
                                         }}
                                     >
-                                        {tooltipText}
+                                        <div
+                                            id="voice-ai-widget-disclaimer"
+                                            role="tooltip"
+                                            style={{
+                                                ...(tooltipFontStyle as CSSProperties),
+                                                maxWidth: tooltipMaxWidth,
+                                                width: "max-content",
+                                                boxSizing: "border-box",
+                                                padding: tooltipPadding,
+                                                background: tooltipBackgroundColor,
+                                                color: tooltipTextColor,
+                                                borderRadius: 10,
+                                                boxShadow: boxShadowToCSS(tooltipShadow) || DEFAULT_TOOLTIP_SHADOW,
+                                                textAlign: "left",
+                                                lineHeight: 1.35,
+                                                transform: `translate(${Number(tooltipBubbleOffsetX) || 0}px, ${Number(tooltipBubbleOffsetY) || 0}px)`,
+                                            }}
+                                        >
+                                            {tooltipText}
+                                        </div>
                                         <div
                                             aria-hidden
                                             style={{
-                                                position: "absolute",
-                                                left: "50%",
-                                                bottom: -6,
-                                                marginLeft: -8,
                                                 width: 16,
                                                 height: 7,
+                                                marginTop: -2,
                                                 overflow: "hidden",
+                                                flexShrink: 0,
                                                 filter: "drop-shadow(0px 3px 3px rgba(0,0,0,0.10))",
                                             }}
                                         >
@@ -1484,11 +1512,13 @@ export default function VoiceAIWidget({
                     type="button"
                     aria-label="End call"
                     onClick={endCall}
+                    onMouseEnter={() => setEndCallHovered(true)}
+                    onMouseLeave={() => setEndCallHovered(false)}
                     style={{
                         width: 40,
                         height: 40,
                         borderRadius: 20,
-                        background: accentColor,
+                        background: endCallHovered ? END_CALL_BTN_BG_HOVER : END_CALL_BTN_BG,
                         border: "none",
                         cursor: "pointer",
                         display: "flex",
@@ -1497,6 +1527,7 @@ export default function VoiceAIWidget({
                         color: activeEndCallIconColor,
                         flexShrink: 0,
                         marginLeft: 10,
+                        transition: "background-color 0.15s ease",
                     }}
                 >
                     <IconCrossFromAsset size={15} />
@@ -1540,8 +1571,9 @@ addPropertyControls(VoiceAIWidget, {
 
     accentColor: {
         type: ControlType.Color,
-        title: "Accent (handset, button, glow, wire dash)",
+        title: "Accent (handset, glow, wire dash)",
         defaultValue: ACCENT_DEFAULT,
+        description: "End call uses **#ED4D17** (fixed) with a darker hover.",
     },
     loopGreyColor: {
         type: ControlType.Color,
@@ -1699,6 +1731,27 @@ addPropertyControls(VoiceAIWidget, {
         type: ControlType.String,
         title: "Tooltip · padding (CSS)",
         defaultValue: "10px 12px",
+    },
+    tooltipBubbleOffsetY: {
+        type: ControlType.Number,
+        title: "Tooltip · bubble ↑↓ (px)",
+        defaultValue: 0,
+        min: -120,
+        max: 120,
+        step: 1,
+        displayStepper: true,
+        description:
+            "Moves the **rounded text box** only; the **▼** pointer stays on the **i** icon. Use **negative** values to shift the bubble **up** when the top is cut off.",
+    },
+    tooltipBubbleOffsetX: {
+        type: ControlType.Number,
+        title: "Tooltip · bubble ←→ (px)",
+        defaultValue: 0,
+        min: -120,
+        max: 120,
+        step: 1,
+        displayStepper: true,
+        description: "Slides the bubble horizontally; the pointer stays centered under the icon.",
     },
     infoIconStroke: {
         type: ControlType.Color,
