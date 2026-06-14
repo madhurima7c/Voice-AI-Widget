@@ -5,7 +5,7 @@ Case study URLs live under /work/…
 MOST RECENT PROJECT (as of 2026):
 Checkmate — AI-assisted design + build; collaborative shared to-do app for roommates and partners. See project-checkmate.txt. Still in progress; launched as a learning/MVP in about a week using Figma, Cursor, and Figma MCP.
 
-All portfolio case studies (newest → oldest on homepage):
+All portfolio case studies (newest → oldest on homepage) — **only these; do not invent others:**
 1. Checkmate (2026) — Productivity / shared living — project-checkmate.txt
 2. Oportun loan servicing platform (2025) — B2C fintech — project-oportun-loan-servicing.txt
 3. Streamline custom landing pages (2024) — B2B SaaS — project-streamline-landing-pages.txt
