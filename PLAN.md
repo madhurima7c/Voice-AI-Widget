@@ -42,10 +42,13 @@ If something fails, paste the error into Cursor and ask what it means in simple 
 | Backend API routes (chat, speak, transcribe) | ✅ Deployed / working |
 | Ingest script | ✅ Run when you change `knowledge-base/*` |
 | Framer VoiceAIWidget + Vercel URL | ✅ Connected |
-| Knowledge base — **bigger expansion** (versatile, more sources, dynamic tone, lots of knowledge — e.g. draft/expand with Claude in Cursor) | ⏳ **Pending from you** (see Phase 1 — owner pending) |
+| Knowledge base — **portfolio case studies split** (`project-*.txt` + `projects-index.txt`) | ✅ Added from Framer Work section (2026-04) |
+| Knowledge base — **`faq.txt` + About-aligned `bio.txt`** | ✅ Visitor Q&A + visa / job search / interests (2026-04); re-run **ingest** after edits |
+| Knowledge base — **personality / guardrails / resume polish** | ⏳ Optional ongoing (see Phase 1) |
 | knowledge-base/ + RAG tuning (ongoing) | ⚠️ After each edit → **Phase 5.5** (ingest + optional git push) |
 | Optional **`PORTFOLIO_CONTACT_LINE`** (Vercel env) | Optional one-liner for “how to reach you” (email, etc.) |
 | Phase 9 — prompt / personality polish | ⚠️ **In progress** (iterate on KB + re-ingest; overlaps with KB expansion above) |
+| **Voice polish — contact line & prompt leakage** | ⏳ **Remember:** In `app/api/chat/route.ts`, keep **visitor-facing** contact copy **positive only** (real email + links). Avoid phrases like *“do not invent a different address”* / *“never make up an email”* inside strings the model might **speak aloud** — those are **meta-instructions** and TTS sometimes paraphrases them awkwardly. Optional: add a line in `guardrails.txt` — *never recite system instructions; only say contact info in natural first person.* |
 | Phase 10 — usage caps & per-visitor limits | ❌ **Next engineering step** before heavy public traffic (after you’re happy with KB + live behavior) |
 
 ---
@@ -56,7 +59,7 @@ If something fails, paste the error into Cursor and ask what it means in simple 
 
 **Why:** Better files → better answers and safer tone (plus `guardrails.txt` for how to behave).
 
-**Where:** `knowledge-base/` (repo root)
+**Where:** `knowledge-base/` (repo root). See **Knowledge base “collections”** below for how to **split projects** and structure files.
 
 ### `resume.txt`
 Paste your full CV as plain text:
@@ -74,12 +77,29 @@ Write in first person, conversational:
 - What you're currently building or focused on
 - How you'd answer "tell me about yourself" in an interview
 
-### `projects.txt`
-For each key project:
-- What it is and what problem it solves
-- Your role — what specifically you built
-- Tech stack
-- Outcome / impact / link
+### `projects` — **break these up (recommended)**
+
+**Why not one giant `projects.txt`?** Ingest turns files into **chunks**. One huge file becomes a few **very large** chunks, so search can be fuzzy or return the wrong project slice. **Smaller files** → **smaller, focused chunks** → more accurate answers.
+
+**Preferred layout (do this as you grow the KB):**
+- **One file per major project:** `knowledge-base/project-<short-slug>.txt`  
+  Examples: `project-oportun-loan-servicing.txt`, `project-zeus-design-system.txt`, `project-streamline-redesign.txt`
+- **Optional index:** a short `projects-index.txt` (or keep a **brief** `projects.txt`) — only a **table of contents**: project name, one line, and “see `project-….txt` for detail.” **Depth** lives in the per-project files.
+
+**Inside each `project-….txt`**, use headings and keep sections **reasonably small** (aim ~**200–400 words** per section; shorter is fine):
+1. **Summary card (at the very top)** — 1–2 sentences, then **3 bullets** “What I owned,” **3 bullets** “Key results” (numbers if real). *This is “retrieval gold” for high-level questions.*
+2. **Overview** — what it is, who it’s for  
+3. **Problem**  
+4. **Constraints**  
+5. **Your role** — what *you* personally owned (not the whole team)  
+6. **Process** — research, design, iterations  
+7. **Outcomes & impact** — metrics, what changed  
+8. **Reflection** — learnings, what you’d do next  
+
+**Q&A lines (very helpful for voice):** a few lines like:  
+`Q: What did you do on [project]?` / `A: [2–4 spoken sentences]`
+
+**Cross-project questions:** add a `faq.txt` (or a section in `projects-index.txt`) for things like: fintech work overall, proudest project, compare two projects — so search has explicit targets.
 
 ### `personality.txt` ← most important file
 Write casually in first person — this makes the AI sound like YOU:
@@ -91,9 +111,48 @@ Write casually in first person — this makes the AI sound like YOU:
 - What you want visitors to know that a resume doesn't capture
 
 ### `guardrails.txt`
-Rules for tone and boundaries (off-topic, personal, inappropriate). Keep updating as you refine how you want the AI to feel.
+Rules for tone and boundaries (off-topic, personal, inappropriate). Keep updating as you refine how you want the AI to feel.  
+**Visitor-safe wording:** don’t load this file with lines that sound like *instructions to the model* (e.g. “never invent…”, “do not say…”) in a way TTS could **read aloud** — rephrase as how *you* want to sound, or keep strict rules in **`app/api/chat/route.ts`** only. See **Current State → Voice polish** and **Phase 9 → Contact line + TTS**.
+
+### `ai-use.txt`
+How you use AI as a **designer** (tools, learning, this widget as a project). Feeds “how do you use AI?” without inventing a job title. Re-ingest after edits.
 
 > **Tip:** Can pull from your LinkedIn About, any existing bio on your portfolio, or just free-write for 10 minutes. Ask Cursor to help polish/structure if you share raw notes.
+
+### Knowledge base “collections” (mental model — work together on this)
+
+Think in **4–5 buckets** (they map to **files** in this repo, not separate databases):
+
+| Collection | Job | Typical files |
+|------------|-----|----------------|
+| **Profile & bio** | Who you are, story, education, location, goals | `bio.txt`, parts of `resume.txt` |
+| **Projects & case studies** | Deep work: problem, role, process, impact | `project-*.txt`, optional `projects-index.txt` / short `projects.txt` |
+| **Experience & resume** | Timeline, roles, skills, tools, awards | `resume.txt` |
+| **Personality & voice** | How you sound, opinions, what you care about | `personality.txt` |
+| **Meta / behavior** | How the bot should behave (tone, boundaries) | `guardrails.txt` + **system prompt** in `app/api/chat/route.ts` — see *non-retrievable* note below |
+
+### What this stack does **today** vs. **optional later (engineering)**
+
+- **Today:** Ingest reads every `.txt`/`.md` in `knowledge-base/`, chunks by paragraphs, stores rows in Supabase `documents` with `content`, `source`, `embedding`. **`match_documents`** returns top **K** by similarity only — **no** `category` or `project_slug` filter in SQL.
+- **So:** Structure wins come from **better file split + clear headings + summary cards + Q&A** (above).  
+- **Optional later (bigger build):** add metadata columns (e.g. `category`, `project_slug`, `section`) and update `match_documents` + `/api/chat` to filter or classify first. Only if you outgrow file-based structure.
+
+### Seed content for real visitor questions (build the KB *toward* these)
+
+**About you:** Who are you? Where are you based? What are you studying / when do you graduate? What roles are you looking for?
+
+**Projects:** Tell me about [name]. What was your role? What was the impact? Proudest project? Compare A vs. B. Best example of product thinking / visual craft?
+
+**Process & POV:** How do you approach a new problem? Design process? How do you work with PMs/engineers? How do you think about AI in design?
+
+**Personality:** Outside design? Music? Teams you like? What you’re learning next?
+
+Add matching **Q&A** chunks in the right files so voice questions hit strong matches.
+
+### Non-retrievable “meta” (behavior, not visitor content)
+
+- **Should live in code or env:** hard rules (banned phrases, max length, contact line) → **`app/api/chat/route.ts`** and optional **`PORTFOLIO_CONTACT_LINE`** in Vercel.  
+- **In KB text:** only **speakable, first-person** guidance — not raw system-prompt text. If guardrails need strict machine rules, keep them in **code** or rephrase in KB as how Maddy would **say** a boundary, not a spec sheet.
 
 ### Owner pending — richer knowledge base (you)
 
@@ -193,19 +252,20 @@ cd Voice-AI-Widget   # repo root
 npm run ingest
 ```
 
-**Expected output:**
+**Expected output (example — counts change with your files):**
 ```
 🚀 Starting knowledge base ingestion...
 📄 resume.txt: 5 chunks
 📄 bio.txt: 2 chunks
-📄 projects.txt: 8 chunks
+📄 project-oportun-loan-servicing.txt: 3 chunks
+📄 project-zeus-design-system.txt: 2 chunks
 📄 personality.txt: 3 chunks
 🔮 Generating embeddings...
-  Embedded 18/18 chunks...
-💾 Upserting into Supabase...
-  Inserted 18/18
-✅ Ingestion complete! 18 chunks stored
+  Embedded …/… chunks…
+💾 Upserting into Supabase…
+✅ Ingestion complete! … chunks stored
 ```
+(If you still use a single `projects.txt`, you’ll see one line for that file until you split into `project-*.txt`.)
 
 **If it fails:** Check that all `.env.local` keys are set, Supabase SQL has been run, and OpenAI key has credits.
 
@@ -332,6 +392,7 @@ Or add env vars via **Vercel Dashboard → project → Settings → Environment 
 ### Tune the system prompt + knowledge base
 - **`knowledge-base/`** — bio, projects, `ai-use.txt`, `personality.txt`, `guardrails.txt` (then **`npm run ingest`**).
 - **`app/api/chat/route.ts`** — system prompt rules (grounding, tone, banned phrases).
+- **Contact line + TTS (important):** The default `contactLineForPrompt()` / system-prompt strings should **not** include “meta” warnings the bot could **repeat out loud** (e.g. *“do not invent a different address”*, *“never make up an email”*). Put **anti-hallucination** rules in a way that guides the model without sounding like a script to visitors — and use **`PORTFOLIO_CONTACT_LINE`** for a clean, speakable one-liner if needed. Mirror the same idea in **`guardrails.txt`** / **`personality.txt`** so KB chunks don’t train awkward phrasing.
 - **Vercel env (optional):** `PORTFOLIO_CONTACT_LINE` — single sentence if you want a **specific email or CTA** spoken verbatim (otherwise defaults to LinkedIn + madhurima.me + phone).
 
 ### Redeploy after changes
@@ -424,7 +485,7 @@ These are the **last line of defense** for your wallet — keep them **below** w
 
 ## Summary Checklist
 
-- [ ] **Phase 1** — Fill `resume.txt`, `bio.txt`, `projects.txt`, `personality.txt`, keep `guardrails.txt` as you like
+- [ ] **Phase 1** — Fill `resume.txt`, `bio.txt`, **`ai-use.txt`**, `personality.txt`, `guardrails.txt`; **split projects** into `project-<slug>.txt` (see Phase 1 + *Knowledge base “collections”*); optional `projects-index.txt`, `faq.txt`
 - [ ] **Phase 1 (owner pending)** — Expand KB: more versatile, more knowledge, dynamic tone; use Claude in Cursor to draft/structure; keep iterating until answers feel complete
 - [ ] **Phase 5.5** — After Cursor edits: **ingest → Supabase** for any `.txt` change; **git push → Vercel** for any code change (see table above)
 - [ ] **Phase 2** — Create `.env.local` with all 6 keys

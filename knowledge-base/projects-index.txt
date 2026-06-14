@@ -1,0 +1,20 @@
+PROJECTS INDEX — Madhurima Chatterjee (portfolio case studies)
+Full write-ups on site: https://grounded-support-248018.framer.app/ (Work section)
+Case study URLs live under /work/…
+
+MOST RECENT PROJECT (as of 2026):
+Checkmate — AI-assisted design + build; collaborative shared to-do app for roommates and partners. See project-checkmate.txt. Still in progress; launched as a learning/MVP in about a week using Figma, Cursor, and Figma MCP.
+
+All portfolio case studies (newest → oldest on homepage):
+1. Checkmate (2026) — Productivity / shared living — project-checkmate.txt
+2. Oportun loan servicing platform (2025) — B2C fintech — project-oportun-loan-servicing.txt
+3. Streamline custom landing pages (2024) — B2B SaaS — project-streamline-landing-pages.txt
+4. Streamline free trial (2024) — B2B SaaS — project-streamline-free-trial.txt
+5. Streamline web app redesign (2023) — B2B SaaS — project-streamline-redesign.txt
+6. Streamline Figma plugin (2023) — B2B SaaS — project-streamline-figma-plugin.txt
+
+Q: What is Madhurima's most recent project?
+A: Checkmate — a shared to-do app for people who live together (roommates, couples). She designed it in Figma, then built it in about a week with Cursor and Figma MCP. It's AI-assisted product design in practice: DESIGN.md for visuals, TECH.md for build rules, SwiftUI on iOS. Still in progress.
+
+Q: What kind of work does she show on her portfolio?
+A: B2C fintech (Oportun), B2B design tools (Streamline — web app, Framer landing pages, Figma plugin, free trial), and personal product experiments (Checkmate).

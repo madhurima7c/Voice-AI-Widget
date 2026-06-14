@@ -1,4 +1,5 @@
-AI, TOOLS, AND HOW MADHURIMA WORKS (use this when visitors ask about AI, ChatGPT, automation, or “how you use AI”)
+AI, TOOLS, DESIGN PROCESS, AND HOW MADHURIMA WORKS
+(use when visitors ask about AI, tools, tech stack, or design process)
 
 ---
 
@@ -8,14 +9,35 @@ She is a **product / UX designer** — not a data analyst, not a data scientist,
 
 ---
 
-HOW SHE ACTUALLY USES AI (high level — stay honest, don’t invent tools she never mentioned)
+HER DESIGN PROCESS / WORKING STYLE
 
-Like many designers in 2025–2026, she uses AI as a **tool in the loop**: brainstorming, rough copy, quick exploration, sometimes code or component ideas — always with **her taste and judgment** deciding what ships. She does **not** claim to “do analytics” or “own data pipelines” unless that exact work is listed in her resume for a specific role.
+1. **Dive into the problem space** — understand users, business goals, and tech constraints before jumping to pixels.
+2. **Iterate quickly with AI** — create prototypes, test with users and internal stakeholders, refine based on feedback.
+3. **Blend branding and visual skills with product skills** — she brings branding background (Symbiosis, fashion communication) together with product acumen.
+4. **Keep users and business goals at the core** — every decision ties back to who it's for and what the business needs.
+
+---
+
+TOOLS SHE USES
+
+She uses a lot of design and tech tools. When asked, you can summarize from her resume — don't invent tools not listed there.
+
+**Design & product:** Figma, Framer, Sketch, Adobe Creative Suite, HTML/CSS, Jira, Notion, Coda, Mixpanel, UserTesting.com, XCode, MS Office
+
+**AI tools (current, from resume):** ChatGPT, Claude Code, Paper, Cursor, Codex, Conductor, V0
+
+---
+
+HOW SHE ACTUALLY USES AI
+
+Like many designers in 2025–2026, she uses AI as a **tool in the loop**: brainstorming, rough copy, quick exploration, prototyping, sometimes code or component ideas — always with **her taste and judgment** deciding what ships. She does **not** claim to “do analytics” or “own data pipelines” unless that exact work is listed in her resume for a specific role.
 
 She is **building this portfolio voice widget** as a **side project** to learn voice UX, real APIs (speech-to-text, LLM, TTS), and how it feels in Framer — that’s a concrete example of her playing with AI **as a designer**, not a new job title.
+
+Checkmate is another example: Figma for design system, Cursor + Figma MCP for build, AI-assisted end-to-end product work.
 
 ---
 
 IF THE KNOWLEDGE BASE DOESN’T HAVE THE SPECIFIC DETAIL
 
-Say you’re not sure about the exact tools or day-to-day stack, and point them to **madhurima.7c@gmail.com**, **LinkedIn**, or **madhurima.me** for a real conversation — **never** invent a fake toolchain (e.g. don’t make up that she “works as a data analyst” or “owns BI dashboards”).
+Say you’re not sure about the exact tools or day-to-day stack. Be transparent that you're an AI — then point them to **hello@madhurima.me** (the only contact for questions) for a real conversation with Madhurima — **never** invent a fake toolchain.

@@ -1,0 +1,40 @@
+STREAMLINE — Web app redesign (2023)
+Domain: B2B SaaS — design asset library (icons & illustrations)
+Timeline: 4 months
+Role: Product Designer
+Team: Founder, growth marketer, developers
+Site: /work/streamline-redesign
+
+SUMMARY CARD
+Streamline had strong assets but weak retention (~5%) and conversion (~0.9%). Madhurima led a full app redesign: research, layout exploration, three-column “browse / view / customize” model, design system, and staged launch.
+
+THE PROBLEM
+Users signed up but didn't upgrade or stick around. Mixpanel showed funnel drop-off and low feature usage; interviews revealed overwhelm (e.g. two confusing color editors), poor findability, and workflows that didn't match how designers actually use asset libraries.
+
+THE SOLUTION
+- Mixed Mixpanel funnel data with light-user interviews and power-user research.
+- Explored four layout directions; chose three-column layout (find → view → customize) like pro tools users already know.
+- Simplified workflows, improved perceived value, designed for future feature growth without bloat.
+- Testing at 5% of light users; fixed export-format discoverability (formats were hidden in a dropdown — surfaced in panel; export usage jumped).
+- Shipped redesign at streamlinehq.com.
+
+OUTCOMES (portfolio)
+- Feature discovery ↑ 46%
+- User retention ↑ 13%
+- Conversion ↑ ~2%
+
+Q&A
+Q: What was wrong with Streamline before?
+A: Great library, but the app didn't convert or retain — users were overwhelmed and couldn't find key features like export formats.
+
+Q: What did she do?
+A: Research-led redesign with a clearer three-column layout and simplified customization flows.
+
+Q: Domain?
+A: B2B SaaS design tool / asset library.
+
+Q: What was her role?
+A: Product designer — led research, layout exploration, design system, and staged launch with founder, growth, and dev.
+
+Q: What was the impact?
+A: Feature discovery up 46%, retention up 13%, conversion up about 2%.

@@ -1,13 +1,11 @@
 Madhurima Chatterjee
 Product Designer
 Seattle, Washington
-+1 (217) 520 5251
+hello@madhurima.me (only contact for inquiries)
 www.madhurima.me
-linkedin.com/in/madhurima-c/
-madhurima.7c@gmail.com
 
 SUMMARY
-Product / UX Designer with 5+ years of experience designing scalable B2C, SaaS, and fintech products across web and mobile. Currently pursuing a Master's in Human-Computer Interaction + Design at the University of Washington.
+Product Designer currently based in Seattle, with 5+ years of experience designing scalable B2B, SaaS, and B2C fintech products across web and mobile. Specialized in end-to-end product building, design systems, and AI-assisted design. Currently pursuing a Master's in Human-Computer Interaction + Design at the University of Washington (graduating August 2026).
 
 ---
 
@@ -16,7 +14,7 @@ EXPERIENCE
 Oportun — Product Designer II
 August 2024 – August 2025 | India
 
-- Led end-to-end redesign of a high-traffic loan servicing platform (web + mobile), increasing payment conversion by 26% and application creation by 50% through self-serve UX and improved feature discoverability.
+- Led end-to-end redesign of a high-traffic loan servicing platform (web + mobile), increasing payment conversion by 26% and application creation by 50%+ through self-serve UX and improved feature discoverability.
 - Developed a robust design system for Zeus, an agent-facing tool, incorporating over 200 components and all necessary styles for consistent design and development.
 - Organized multiple knowledge exchange sessions within the design team to foster collaboration and shared learning.
 
@@ -38,7 +36,7 @@ June 2021 – August 2022 | India
 - Assisted in hiring designers to strengthen the design team and mentored 2 junior designers.
 
 OneCard — UX Designer
-August 2020 – February 2021 | India
+April 2020 – February 2021 | India
 
 - Designed and launched core app features (Support, Repayment, EMI, Credential Manager), contributing to rapid product adoption in a unicorn-stage fintech startup.
 - Led the design for OneCard Lite, driving a 20% surge in new customer acquisition, subsequently elevating app usage and credit card orders.
@@ -55,17 +53,19 @@ Symbiosis International University
 Bachelor of Design in Fashion Communication (Branding)
 July 2016 – April 2020 | India
 
+- Reimagined the credit card welcome kit, distributing over 50,000 kits across India.
+
 ---
 
 SKILLS
 
-Design: Product Design, UX Design, Interaction Design, UI Design, Design Systems, Responsive Design, Accessibility (WCAG), Information Architecture, User Flows, Wireframing, Design Iterations, Motion Design, Prototyping, Strategy, Presentations
+Design: Product Design, UX Design, Interaction Design, UI Design, Design Systems, Responsive Design, Accessibility (WCAG), Information Architecture, User Flows, Wireframing, Design Iterations, User Interviews, User Research, Usability Testing, A/B Testing, Qualitative & Quantitative Analysis, Experimentation
 
-Research: User Interviews, User Research, Usability Testing, A/B Testing, Qualitative & Quantitative Analysis, Experimentation
+Collaboration: Cross-functional Collaboration, Stakeholder Management, Agile/Scrum, Product Strategy, Design Documentation
 
-Collaboration: Cross-functional Collaboration, Stakeholder Management, Agile/Scrum, Product Strategy, Design Documentation, Asynchronous Work
+Tools: MS Office, Figma, Framer, Sketch, Adobe Creative Suite, HTML/CSS, Jira, Notion, Coda, Mixpanel, UserTesting.com, XCode
 
-Tools: Figma, Framer, Sketch, Adobe Creative Suite, Jitter, HTML/CSS, Jira, Notion, Mixpanel, Usertesting.com, Zeplin, ChatGPT, Claude, Gemini, Cursor, Codex, Claude Code
+AI tools (current): ChatGPT, Claude Code, Paper, Cursor, Codex, Conductor, V0
 
 ---
 
@@ -74,12 +74,12 @@ AWARDS
 Figma Design Awards — Streamline Figma Plugin
 October 2022
 
+Volunteering: Organized "Shilp-Katha," a craft exhibit showcasing rural artisans from across India (October 2019)
+
 ---
 
-CONTACT & LINKS
+CONTACT (for inquiries — voice AI should only share email)
 
-Portfolio: www.madhurima.me
-LinkedIn: linkedin.com/in/madhurima-c/
-Email: madhurima.7c@gmail.com
-Phone: +1 (217) 520 5251
+Email: hello@madhurima.me (only way to reach Madhurima with questions)
+Portfolio: www.madhurima.me (view work — not for direct questions)
 Location: Seattle, Washington

@@ -1,0 +1,49 @@
+OPORTUN — Loan servicing platform redesign (2025)
+Domain: B2C fintech (online loan servicing — web + mobile)
+Timeline: 2 months
+Role: Product Designer (sole designer for online servicing)
+Team: Design manager, PMs, developers
+Site: /work/loan-servicing
+
+SUMMARY CARD
+Oportun serves ~2.2M members with limited credit history. ~800K active loan members were calling support ~116K times/month because the app didn't answer basic payment, balance, and offer questions. Madhurima mapped loan states and redesigned payment + loan-detail flows with a “transparency forward” approach.
+
+THE PROBLEM
+Support costs and delinquency were rising. Self-serve existed on web and mobile, but members still called when they couldn't find what they owed, whether a payment posted, or hardship/renewal eligibility. Mobile web was where most servicing logins happened, but design and the JS stack lagged behind the native app.
+
+THE SOLUTION
+- Contextual payment widget on home: one tap to pay, amount consistent across states.
+- Loan details: glanceable numbers first, progressive disclosure, jargon explained, real-time updates when payments post or fail.
+- Receipts in-app and for download mirror payment confirmation structure (amount, allocation, balance).
+- Mapped loan states (current, past due, hardship, paid ahead, paid off, etc.) across home / summary / extended views.
+- Moved renewal and hardship offers out of a buried carousel into fixed top-of-fold slots.
+- Added reusable components to Storybook; staged rollout to 15% then wider launch.
+
+DESIGN SYSTEMS (member app + Zeus)
+- **Existing system (member-facing):** Extended and updated components for the loan servicing experience — payment widget, loan detail patterns, receipts — documented in Storybook for consistent dev handoff.
+- **New system (Zeus):** Built a full design system from scratch for Zeus, Oportun's agent-facing internal tool — 200+ components, styles, and patterns so agent workflows stayed consistent and scalable.
+
+OUTCOMES (1 month post launch, portfolio figures)
+- Feature discoverability ↑ 395%
+- App logins ↑ 64%
+- Customer calls ↓ 29%
+- Portfolio also notes Oportun won “America's Best Customer Service in Financial Services” (2026).
+
+Q&A
+Q: What was the problem at Oportun?
+A: Members couldn't self-serve on payments and loan info, so they called support — expensive and tied to delinquency.
+
+Q: What did she solve?
+A: Transparency-forward servicing UX: contextual payment widget, clearer loan details, understandable receipts, better offer placement — across mobile web first.
+
+Q: What domain?
+A: B2C fintech — loan servicing for underbanked consumers in the US.
+
+Q: What was your role?
+A: Sole product designer for online loan servicing — web and mobile — working with design manager, PMs, and developers.
+
+Q: What was the impact?
+A: About a month post-launch: feature discoverability up 395%, app logins up 64%, customer calls down 29%.
+
+Q: Design systems work at Oportun?
+A: Updated and extended the existing member-facing system (Storybook components for payments, loan details, receipts). Also created Zeus from scratch — the agent-facing design system with 200+ components.

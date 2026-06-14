@@ -1,0 +1,39 @@
+STREAMLINE — Free trial / sign-up growth (2024)
+Domain: B2B SaaS — growth / monetization
+Timeline: 2 weeks
+Role: Product Designer
+Team: Founder, product marketer, developers
+Site: /work/free-trial
+
+SUMMARY CARD
+Streamline let anyone browse and download without signing up — great for discovery, weak for emails and backlinks. She designed a free trial: 10 credits on premium sets for web and desktop, with abuse prevention.
+
+THE PROBLEM
+Open access meant users rarely gave emails. The business needed a fair exchange: something valuable enough to sign up, without walling off the whole library overnight.
+
+THE SOLUTION
+- Floating banner for signed-out visitors on premium sets.
+- Prompt to sign up when hitting premium assets; 10 free credits on premium sets (web + desktop).
+- Dev team added safeguards against duplicate/abusive sign-ups (similar email patterns).
+- Idea sparked by a user on a research call: “let people test before committing.”
+
+OUTCOMES (portfolio)
+- Sign-ups ↑ 40%
+- ~19K emails collected
+- Upgrades ↑ 8%
+
+Q&A
+Q: Problem?
+A: Too much free access without capturing emails or demonstrating premium value.
+
+Q: Solution?
+A: Limited free credits on premium content with clear signup prompts and anti-abuse checks.
+
+Q: Domain?
+A: B2B SaaS — growth and conversion design.
+
+Q: What was her role?
+A: Product designer — two-week sprint with founder, product marketer, and dev; designed trial flow and anti-abuse safeguards with engineering.
+
+Q: What was the impact?
+A: Sign-ups up 40%, ~19K emails collected, upgrades up 8%.

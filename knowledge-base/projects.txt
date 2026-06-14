@@ -1,58 +1,13 @@
-PROJECTS — Madhurima Chatterjee
-Full case studies: www.madhurima.me
+PROJECTS — pointer file (detailed case studies split per project)
 
----
+Portfolio case studies are stored as separate files for better voice search:
+- projects-index.txt — list + “most recent project”
+- project-checkmate.txt (2026, most recent)
+- project-oportun-loan-servicing.txt
+- project-streamline-redesign.txt
+- project-streamline-landing-pages.txt
+- project-streamline-figma-plugin.txt
+- project-streamline-free-trial.txt
 
-1. Loan Servicing Platform Redesign — Oportun (2024)
-Role: Product Designer II (end-to-end ownership)
-What I built: Led a full redesign of a high-traffic loan servicing platform across web and mobile. The goal was to shift users toward self-serve — reducing dependency on agents while making the loan journey more intuitive and discoverable.
-Outcome: Payment conversion increased by 26%. Application creation increased by 50%.
-Context: Oportun serves underbanked communities in the US. Getting this UX right had real financial consequences for real people — that stakes level made the work meaningful.
-
----
-
-2. Zeus Design System — Oportun (2024)
-Role: Product Designer II
-What I built: Developed a comprehensive design system for Zeus, an internal agent-facing tool. Built 200+ components with all necessary styles, documentation, and interaction patterns to ensure consistency across design and engineering.
-Outcome: Enabled faster, more consistent product delivery across teams.
-
----
-
-3. Streamline Web App Redesign (2023)
-Role: Lead UX Designer (sole designer on product)
-What I built: Led the entire product experience redesign across web, Mac desktop app, Figma plugin, and Lucid integration. Owned everything from strategy and user research to final UI and handoff.
-Outcome: Feature usage increased by up to 66%. User retention increased by 13%. Conversion rate improved by 22%. Conducted 35+ user interviews throughout the process.
-
----
-
-4. Free Trial Strategy & Design — Streamline (2023)
-Role: Strategy + Design
-What I built: Designed a new free trial experience that let users access a limited set of premium downloads without committing. The goal was to lower the barrier to sign-up and let the product speak for itself.
-Outcome: Desktop app sign-ups increased by 40%.
-
----
-
-5. Streamline Figma Plugin (2022)
-Role: Product Designer
-What I built: Designed the Figma plugin for Streamline's icon library — enabling designers to search, browse, and insert icons directly from Figma without leaving their workflow.
-Outcome: Won a Figma Design Award for best icon plugin (October 2022).
-
----
-
-6. Streamline Icon Websites (2022–2023)
-Role: Website Designer & Developer
-What I built: Designed and developed 20+ responsive landing pages in Framer for Streamline's various icon sets. Fast, on-brand, and built without a separate developer — this is also where I got serious about Framer as a design and development tool.
-
----
-
-7. Credit Card App — OneCard (2020–2021)
-Role: UX Designer
-What I built: Designed and launched core app features including Support ticket flow, Repayment, EMI management, and Credential Manager. Also led design for OneCard Lite — a simplified version targeting first-time credit card users.
-Outcome: OneCard Lite drove a 20% surge in new customer acquisition. Contributed to rapid product adoption during the company's unicorn-stage growth.
-
----
-
-8. Multi-sector Interfaces — PwC (2021–2022)
-Role: UX Designer (product / UX design — not analytics or data science)
-What I built: Designed multi-platform **UX** for client work across FinTech, automotive, healthcare, and other enterprise sectors. Led workshops to turn ambiguous briefs into clear, buildable product UX. Mentored junior designers.
-Note for the AI: “analytics” here means **client industries she designed for**, not that she was a data analyst.
+Older resume-style project bullets may still appear in resume.txt.
+Live case studies: https://grounded-support-248018.framer.app/

@@ -292,84 +292,92 @@ function IconInfoFromAsset({ size = 13, stroke = "#8A8A8A", fill = "#8A8A8A" }: 
 const ACTIVE_IMG_PHOTO_RECT = { x: 0, y: 0, w: 37, h: 36, rx: 18 }
 
 /**
- * Fetch a GIF, patch its NETSCAPE2.0 loop extension to 0 (infinite),
- * and return a blob URL.  If the block is missing we insert one.
- * Returns the original URL unchanged for non-GIF / fetch failures.
+ * Fetch + patch GIF loop (same as browser hook). Returns blob: URL or original `src`
+ * for non-GIF / failures. Caller must revoke blob: URLs when discarding.
  */
-function useLoopingGif(src: string | undefined): string | undefined {
-    const [blobUrl, setBlobUrl] = useState<string | undefined>()
+async function prepareLoopingGifUrl(src: string): Promise<string> {
+    try {
+        const r = await fetch(src, { mode: "cors", cache: "force-cache" })
+        const buf = await r.arrayBuffer()
+        const bytes = new Uint8Array(buf)
+        if (
+            bytes.length < 14 ||
+            String.fromCharCode(bytes[0], bytes[1], bytes[2]) !== "GIF"
+        ) {
+            return src
+        }
+        let patched = false
+        for (let i = 0; i < bytes.length - 18; i++) {
+            if (bytes[i] === 0x21 && bytes[i + 1] === 0xff && bytes[i + 2] === 0x0b) {
+                const label = String.fromCharCode(...Array.from(bytes.slice(i + 3, i + 14)))
+                if (label === "NETSCAPE2.0") {
+                    bytes[i + 16] = 0
+                    bytes[i + 17] = 0
+                    patched = true
+                    break
+                }
+            }
+        }
+        if (!patched) {
+            const flags = bytes[10]
+            const hasGCT = (flags & 0x80) !== 0
+            const gctSize = hasGCT ? 3 * (1 << ((flags & 0x07) + 1)) : 0
+            const ins = 6 + 7 + gctSize
+            const block = new Uint8Array([
+                0x21, 0xff, 0x0b, 0x4e, 0x45, 0x54, 0x53, 0x43, 0x41, 0x50, 0x45, 0x32, 0x2e, 0x30, 0x03, 0x01, 0x00, 0x00, 0x00,
+            ])
+            const out = new Uint8Array(bytes.length + block.length)
+            out.set(bytes.slice(0, ins))
+            out.set(block, ins)
+            out.set(bytes.slice(ins), ins + block.length)
+            return URL.createObjectURL(new Blob([out], { type: "image/gif" }))
+        }
+        return URL.createObjectURL(new Blob([bytes], { type: "image/gif" }))
+    } catch {
+        return src
+    }
+}
+
+function revokeIfBlob(url: string | undefined) {
+    if (url?.startsWith("blob:")) URL.revokeObjectURL(url)
+}
+
+/**
+ * If `warm` matches `src`, uses prepared URL immediately (no second fetch).
+ * Only revokes blob URLs created by this hook — not `warm.url` (owned by prefetcher).
+ */
+function useLoopingGif(src: string | undefined, warm: { forSrc: string; url: string } | null): string | undefined {
+    const ownedRef = useRef<string | undefined>(undefined)
+    const [blobUrl, setBlobUrl] = useState<string | undefined>(() =>
+        src && warm?.forSrc === src ? warm.url : undefined
+    )
     useEffect(() => {
+        ownedRef.current = undefined
         if (!src) {
             setBlobUrl(undefined)
             return
         }
-        let revoked = false
-        let url: string | undefined
-        fetch(src, { mode: "cors" })
-            .then((r) => r.arrayBuffer())
-            .then((buf) => {
-                if (revoked) return
-                const bytes = new Uint8Array(buf)
-                if (
-                    bytes.length < 14 ||
-                    String.fromCharCode(bytes[0], bytes[1], bytes[2]) !== "GIF"
-                ) {
-                    setBlobUrl(src)
-                    return
-                }
-                let patched = false
-                for (let i = 0; i < bytes.length - 18; i++) {
-                    if (
-                        bytes[i] === 0x21 &&
-                        bytes[i + 1] === 0xff &&
-                        bytes[i + 2] === 0x0b
-                    ) {
-                        const label = String.fromCharCode(
-                            ...Array.from(bytes.slice(i + 3, i + 14))
-                        )
-                        if (label === "NETSCAPE2.0") {
-                            bytes[i + 16] = 0
-                            bytes[i + 17] = 0
-                            patched = true
-                            break
-                        }
-                    }
-                }
-                if (!patched) {
-                    const flags = bytes[10]
-                    const hasGCT = (flags & 0x80) !== 0
-                    const gctSize = hasGCT
-                        ? 3 * (1 << ((flags & 0x07) + 1))
-                        : 0
-                    const ins = 6 + 7 + gctSize
-                    const block = new Uint8Array([
-                        0x21, 0xff, 0x0b, 0x4e, 0x45, 0x54, 0x53, 0x43,
-                        0x41, 0x50, 0x45, 0x32, 0x2e, 0x30, 0x03, 0x01,
-                        0x00, 0x00, 0x00,
-                    ])
-                    const out = new Uint8Array(bytes.length + block.length)
-                    out.set(bytes.slice(0, ins))
-                    out.set(block, ins)
-                    out.set(bytes.slice(ins), ins + block.length)
-                    url = URL.createObjectURL(
-                        new Blob([out], { type: "image/gif" })
-                    )
-                    setBlobUrl(url)
-                    return
-                }
-                url = URL.createObjectURL(
-                    new Blob([bytes], { type: "image/gif" })
-                )
-                setBlobUrl(url)
-            })
-            .catch(() => {
-                if (!revoked) setBlobUrl(src)
-            })
-        return () => {
-            revoked = true
-            if (url) URL.revokeObjectURL(url)
+        if (warm?.forSrc === src && warm.url) {
+            setBlobUrl(warm.url)
+            return
         }
-    }, [src])
+        let cancelled = false
+        void prepareLoopingGifUrl(src).then((u) => {
+            if (cancelled) {
+                revokeIfBlob(u)
+                return
+            }
+            setBlobUrl(u)
+            if (u.startsWith("blob:")) ownedRef.current = u
+        })
+        return () => {
+            cancelled = true
+            if (ownedRef.current) {
+                URL.revokeObjectURL(ownedRef.current)
+                ownedRef.current = undefined
+            }
+        }
+    }, [src, warm?.forSrc, warm?.url])
     return blobUrl
 }
 
@@ -379,6 +387,7 @@ function useLoopingGif(src: string | undefined): string | undefined {
 function ActiveCallArtwork({
     heightPx,
     gifSrc,
+    warmLoopingGif,
     gifGrayscale,
     cardBackground,
     greyColor,
@@ -388,6 +397,8 @@ function ActiveCallArtwork({
 }: {
     heightPx: number
     gifSrc: string | undefined
+    /** Prefetched blob / URL for the same `gifSrc` — skips duplicate fetch when active. */
+    warmLoopingGif: { forSrc: string; url: string } | null
     gifGrayscale: boolean
     cardBackground: string
     greyColor: string
@@ -397,7 +408,9 @@ function ActiveCallArtwork({
 }) {
     const accentRef = useRef<SVGPathElement>(null)
     const tlRef = useRef<any>(null)
-    const loopingGifSrc = useLoopingGif(gifSrc)
+    const warm =
+        gifSrc && warmLoopingGif?.forSrc === gifSrc && warmLoopingGif.url ? warmLoopingGif : null
+    const loopingGifSrc = useLoopingGif(gifSrc, warm)
 
     useEffect(() => {
         const path = accentRef.current
@@ -477,6 +490,7 @@ function ActiveCallArtwork({
                         alt=""
                         loading="eager"
                         decoding="async"
+                        fetchPriority="high"
                         draggable={false}
                         style={{
                             width: "100%",
@@ -643,6 +657,52 @@ export default function VoiceAIWidget({
 
     const defaultAvatarSrc = framerImageSrc(defaultAvatar)
     const activeCallAvatarSrc = framerImageSrc(activeCallAvatar)
+
+    const activeGifSrcRef = useRef<string | undefined>(undefined)
+    activeGifSrcRef.current = activeCallAvatarSrc
+    const prefetchGifInFlightRef = useRef<string | null>(null)
+    const [warmLoopingGif, setWarmLoopingGif] = useState<{ forSrc: string; url: string } | null>(null)
+
+    const prefetchActiveCallGif = useCallback(() => {
+        const s = activeCallAvatarSrc?.trim()
+        if (!s) return
+        if (typeof navigator !== "undefined") {
+            const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
+            if (conn?.saveData) return
+        }
+        if (prefetchGifInFlightRef.current === s) return
+        prefetchGifInFlightRef.current = s
+        void prepareLoopingGifUrl(s).then((url) => {
+            prefetchGifInFlightRef.current = null
+            if (activeGifSrcRef.current !== s) {
+                revokeIfBlob(url)
+                return
+            }
+            setWarmLoopingGif((prev) => {
+                if (prev?.forSrc === s) {
+                    revokeIfBlob(url)
+                    return prev
+                }
+                if (prev?.url.startsWith("blob:")) revokeIfBlob(prev.url)
+                return { forSrc: s, url }
+            })
+        })
+    }, [activeCallAvatarSrc])
+
+    useEffect(() => {
+        const s = activeCallAvatarSrc?.trim()
+        setWarmLoopingGif((prev) => {
+            if (!s) {
+                if (prev?.url.startsWith("blob:")) revokeIfBlob(prev.url)
+                return null
+            }
+            if (prev && prev.forSrc !== s) {
+                if (prev.url.startsWith("blob:")) revokeIfBlob(prev.url)
+                return null
+            }
+            return prev
+        })
+    }, [activeCallAvatarSrc])
 
     const defaultSvgTrim = (defaultAvatarSvg ?? "")
         .trim()
@@ -813,6 +873,11 @@ export default function VoiceAIWidget({
         smoothedLevelRef.current = 0
         setIsVoiceActive(false)
         setEndCallHovered(false)
+        prefetchGifInFlightRef.current = null
+        setWarmLoopingGif((prev) => {
+            if (prev?.url.startsWith("blob:")) revokeIfBlob(prev.url)
+            return null
+        })
         setPhase("default")
         setMicError(false)
         greetingStartedRef.current = false
@@ -1125,6 +1190,7 @@ export default function VoiceAIWidget({
             setMicError(true)
             return
         }
+        queueMicrotask(() => prefetchActiveCallGif())
 
         const goListen = () => {
             if (phaseRef.current === "active") listenOnceRef.current()
@@ -1165,7 +1231,7 @@ export default function VoiceAIWidget({
             console.error("[VoiceAI] greeting fetch failed:", e)
             goListen()
         }
-    }, [apiBase, greetingMessage, playAudioFromBlob])
+    }, [apiBase, greetingMessage, playAudioFromBlob, prefetchActiveCallGif])
 
     const defaultShadow = boxShadowToCSS(defaultCardShadow).trim() || DEFAULT_CARD_SHADOW
     const defaultShadowInteractive = defaultCardHovered
@@ -1190,7 +1256,10 @@ export default function VoiceAIWidget({
                         startCall()
                     }
                 }}
-                onMouseEnter={() => setDefaultCardHovered(true)}
+                onMouseEnter={() => {
+                    setDefaultCardHovered(true)
+                    prefetchActiveCallGif()
+                }}
                 onMouseLeave={() => setDefaultCardHovered(false)}
                 style={{
                     position: "relative",
@@ -1483,6 +1552,7 @@ export default function VoiceAIWidget({
                     <ActiveCallArtwork
                         heightPx={Math.round(defaultAvatarSize * 0.72)}
                         gifSrc={activeCallAvatarSrc}
+                        warmLoopingGif={warmLoopingGif}
                         gifGrayscale={activeCallGifGrayscale}
                         cardBackground={activeCardBackground}
                         greyColor={loopGreyColor}

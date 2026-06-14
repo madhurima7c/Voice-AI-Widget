@@ -1,0 +1,42 @@
+CHECKMATE — Collaborative to-do for shared living (2026)
+Domain: Productivity / consumer app / AI-assisted design & build
+Timeline: ~1 week MVP (ongoing)
+Role: Founder, designer (built with Cursor as “developer”)
+Team: Cursor (AI coding)
+Site: /work/checkmate
+
+SUMMARY CARD
+Checkmate is a shared to-do board for roommates and partners — tasks look like sticky notes, organized by day. Personal todos and assigned todos live in one place. Low friction, not “work software,” not a group chat that forgets agreements.
+
+THE PROBLEM
+Roommates and couples don't need another complicated task manager. Paper notes on a fridge work because they're casual and visible — but they don't sync. Most shared lists feel like work software or a chat thread that loses what you agreed to.
+
+THE SOLUTION
+Every task is a post-it: equal priority, no urgency flags, no nested projects. Write it, assign it if someone else should do it, check it off when done. Built for people splitting chores, errands, and small commitments.
+
+HOW SHE BUILT IT (AI-assisted design — important for “how do you use AI” questions)
+- Designed in Figma first: sticky colors, type, spacing, icons, core screens (home, add todo, friends) in a small design system.
+- Two markdown files kept Cursor aligned: DESIGN.md (visual rules) and TECH.md (build constraints).
+- Figma MCP bridged design and code: pointed Cursor at specific frames (home grid, add todo sheet, sticky card) for spacing and tokens, mapped into Theme.swift and SwiftUI components.
+- Shipped an MVP in about a week by cutting scope hard and thinking on the spot.
+
+REFLECTION (spoken-friendly)
+- One-week deadline forced quick scope cuts and fast decisions.
+- She collaborated with AI like a developer: clear specs, sometimes sketches, iterating in Cursor.
+- Checkmate is still in progress — email hello@madhurima.me for the latest on launch.
+
+Q&A
+Q: What was the problem Checkmate solves?
+A: Shared living needs something fast and visible for chores and errands — not heavy project software.
+
+Q: What was her solution?
+A: A daily board of post-it tasks you can assign or keep personal, organized by day, checked off when done.
+
+Q: What was her role?
+A: Founder and designer — end-to-end from Figma through SwiftUI build with Cursor and Figma MCP.
+
+Q: What domain is Checkmate?
+A: Productivity / consumer / shared living.
+
+Q: Is Checkmate her latest project?
+A: Yes — most recent portfolio case study (2026). AI-assisted: Figma → Figma MCP → Cursor → SwiftUI.

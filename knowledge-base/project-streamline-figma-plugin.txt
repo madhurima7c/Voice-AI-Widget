@@ -1,0 +1,38 @@
+STREAMLINE — Figma plugin for icons (2023)
+Domain: B2B SaaS — design tooling / Figma ecosystem
+Timeline: 3 weeks
+Role: Product Designer
+Team: Founder, developer
+Site: /work/streamline-plugin
+
+SUMMARY CARD
+Designers wanted Streamline inside Figma. Competitor icon plugins were on-canvas; paying Streamline users had to leave Figma to browse and export. She designed search, browse, customize, and drag-to-canvas in three weeks.
+
+THE PROBLEM
+Streamline was losing reach and retention because it wasn't where designers work. Paying users faced friction leaving Figma; users requested a native plugin (Canny).
+
+THE SOLUTION
+- Drag-and-drop icons straight onto the canvas — no export/download hop.
+- Packed web-app features into a narrow plugin shell with progressive disclosure.
+- Expandable panel: compact for search-and-drop, grows for deeper customization.
+- Learned Figma plugin guidelines and worked closely with engineering on constraints.
+
+OUTCOMES (Figma Community, portfolio)
+- Liked by 6.3K+ users; used by 452K+ users
+- Won Figma “Favourite Graphic Resource” award
+
+Q&A
+Q: Problem?
+A: Streamline wasn't in Figma while competitors were — workflow friction and churn risk.
+
+Q: Solution?
+A: Native Figma plugin with search, customize, and drag-to-canvas in a scalable panel.
+
+Q: Domain?
+A: B2B SaaS design assets / Figma plugin.
+
+Q: What was her role?
+A: Product designer — three-week sprint with founder and developer; learned Figma plugin guidelines and shipped drag-to-canvas.
+
+Q: What was the impact?
+A: 452K+ community users, 6.3K+ likes, Figma “Favourite Graphic Resource” award.

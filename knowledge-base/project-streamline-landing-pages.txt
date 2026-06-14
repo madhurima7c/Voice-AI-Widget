@@ -1,0 +1,38 @@
+STREAMLINE — Custom landing pages (2024)
+Domain: B2B SaaS — marketing / growth (Framer)
+Timeline: 2 months
+Role: Product Designer
+Team: Founder
+Site: /work/landing-page
+
+SUMMARY CARD
+Visitors didn't know which icon set to pick or how to use Streamline in real projects. Support tickets and research showed demand for use-case examples, not just a catalog. She designed use-case-driven landing pages and turned them into Framer CMS templates.
+
+THE PROBLEM
+Users felt unsure Streamline fit their project. They wanted practical examples (interfaces, presentations, signage, etc.), not only a flat catalog of sets.
+
+THE SOLUTION
+- Started with one page per icon set — not scalable as the library grew.
+- Landed on one template per use case: hero, recommended sets, visual examples (interfaces, graphic design, product design, presentations, diagrams, signage).
+- Built first pages in Framer, then CMS templates for consistency and speed.
+- Created sample use-case visuals using Streamline sets themselves.
+
+OUTCOMES
+- Higher website engagement; users referenced use cases inside the product.
+- Fewer “how do I use this?” support queries; team could link to landing sections.
+
+Q&A
+Q: Problem?
+A: People couldn't decide which sets to use or how Streamline applied to their work.
+
+Q: Solution?
+A: Scalable Framer CMS landing pages organized by use case, not by individual set.
+
+Q: Domain?
+A: B2B SaaS — growth/marketing design + Framer development.
+
+Q: What was her role?
+A: Product designer — researched use cases, designed Framer pages, then built CMS templates for scale with the founder.
+
+Q: What was the impact?
+A: Higher site engagement, fewer “how do I use this?” support tickets, use cases referenced inside the product.
